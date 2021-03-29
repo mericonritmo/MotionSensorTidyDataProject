@@ -26,6 +26,10 @@ mean_and_std_cols <- grep('mean\\(\\)|std\\(\\)',features$colname)
 # map these columns to the column names in sensor_data
 select_cols <- paste('V', mean_and_std_cols, sep='')
 
+# read activity labels and insert into activity column
+activities <- read.table(paste(data_path,'activity_labels.txt', sep = '/'), col.names = c('code', 'label'))
+activity_data$activity <- cut(activity_data$activity, breaks = 6, labels = activities$label)
+
 # convert sensor data to tibbles and extract mean & std columns
 sensor_data <- tbl_df(sensor_data)
 sensor_data <- select(sensor_data, select_cols)
