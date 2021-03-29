@@ -41,4 +41,4 @@ data_set <- group_by(data_set, subject, activity)
 data_avs <- summarize_all(data_set, mean)
 
 # send results to tidy data file
-write.table(data_avs, 'activity_data_tidy.txt')
+write.table(data_avs, 'activity_data_tidy.txt', row.name=FALSE)
